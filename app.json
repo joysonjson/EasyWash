@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Easy Wash",
+    "slug": "Easy_Wash",
+    "privacy": "public",
+    "sdkVersion": "34.0.0",
+    "android": {
+      "package": "com.joyson.EasyWash",
+      "versionCode": 1,
+      "icon": "./assets/appIcon.png"
+    },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/appIcon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false
+    },
+    "description": ""
+  }
+}
