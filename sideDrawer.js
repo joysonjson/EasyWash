@@ -149,7 +149,7 @@ const customDrawerComponent = props => (
         title="Logout"
         style = {styles.logOutButton}
         onPress={() => this._logout(props) }/> */}
-        <TouchableOpacity>
+        <TouchableOpacity  onPress={() => this._logout(props) }>
       <View style={styles.item}>
         <View style={styles.iconContainer}>
           <AntDesign name= 'logout' size={20} style={styles.icon}/>

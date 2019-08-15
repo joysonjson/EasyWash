@@ -1,13 +1,7 @@
 import React,{Component} from 'react';
 import {Text,View,StyleSheet,FlatList} from 'react-native';
-// import SuperServiceData from '../Data/SuperServiceData'
-// import PlatinumServiceData from '../Data/PlatinumServiceData'
-
-// import StandardServiceData from '../Data/StandardServiceData'
 
 class ServiceDetails extends Component {
-
- // const arrayOfData =  this.props.navigation.state.params.something; // outputs "Some Value"
 
     
     state = {  }
