@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, Image} from 'react-native';
 
-import logoImg from '../images/logo.png';
+import logoImg from '../assets/appIcon.png';
 
 export default class Logo extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
-        <Text style={styles.text}>REACT NATIVE</Text>
+        {/* <Text style={styles.text}>Welcome Back</Text> */}
       </View>
     );
   }
@@ -22,8 +22,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 150,
+    height: 150,
+   borderRadius: 75 ,
+   borderColor:'#21a8c6',  
+   overflow: "hidden",
+  borderWidth: 3,
   },
   text: {
     color: 'white',

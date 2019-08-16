@@ -175,23 +175,134 @@
 
 //   }
 // });
+
+ import imgLoading from "../assets/loading.gif";
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../Component/Logo1';
 import Form from '../Component/Form';
 import Wallpaper from '../Component/Wallpaper';
 import ButtonSubmit from '../Component/ButtonSubmit';
+import Dimensions from 'Dimensions';
+import { diff } from "../constants/Colors";
+import { myWidth, myHeight } from "../constants/Colors";
+import * as colors from "../constants/Colors";
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  View,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+  Animated,
+  Text,
+} from 'react-native';
+
+import UserInput from '../Component/UserInput';
 import SignupSection from '../Component/SignupSection';
 
-export default class LoginScreen extends Component {
+import usernameImg from '../images/username.png';
+import passwordImg from '../images/password.png';
+import eyeImg from '../images/eye_black.png';
+import { sin } from 'react-native/Libraries/Animated/src/Easing';
+
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
+
+class SignInScreen extends Component {
+  _animation(obj, toValue, duration) {
+    console.log("_animation");
+
+    if (this._isMounted) {
+      Animated.timing(obj, {
+        toValue,
+        duration
+      }).start();
+    }
+  }
+
+  signIn = async () => {
+    
+    if (this.state.isLoading) return;
+
+    this.setState({ isLoading: true });
+    this._animation(this.buttonAnimated, 1, 200);
+
+    if (this.state.username === "") {
+      Alert.alert("Enter your name.");
+      return;
+    }
+      
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+      this._animation(this.buttonAnimated, 0, 200);
+  }, 2000);
+      await AsyncStorage.setItem("userToken", this.state.username);
+      this.buttonAnimated = new Animated.Value(0);
+
+      console.log("App");
+
+      this.props.navigation.navigate("App");
+  
+  };
+
+      
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      isLoading: false
+    };
+    this.buttonAnimated = new Animated.Value(0);
+  }
   render() {
+    const changeWidth = this.buttonAnimated.interpolate({
+      inputRange: [0, 1],
+      outputRange: [myWidth * 0.9, myHeight * 0.08]
+    });
     return (
+    // <DismissKeyboard>
       <Wallpaper>
         <Logo />
         <Form />
         <SignupSection />
         <ButtonSubmit />
-      </Wallpaper>
+   </Wallpaper> 
+  //  </DismissKeyboard>
     );
   }
 }
+
+const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_HEIGHT = Dimensions.get('window').height;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  btnEye: {
+    position: 'absolute',
+    top: 55,
+    right: 28,
+  },
+  iconEye: {
+    width: 25,
+    height: 25,
+    tintColor: 'rgba(0,0,0,0.2)',
+  },
+  btn: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: myHeight * 0.08,
+    borderRadius: myHeight * 0.04,
+    backgroundColor: colors.PRIMARY
+  },
+});
+export default SignInScreen;

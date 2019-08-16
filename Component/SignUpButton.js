@@ -20,7 +20,7 @@ const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 const MARGIN = 40;
 
-export default class ButtonSubmit extends Component {
+export default class SignUpButton extends Component {
   constructor() {
     super();
 
@@ -48,7 +48,7 @@ export default class ButtonSubmit extends Component {
     }, 2000);
 
     setTimeout(() => {
-      //Actions.secondScreen();
+      // Actions.secondScreen();
       this.setState({isLoading: false});
       this.buttonAnimated.setValue(0);
       this.growAnimated.setValue(0);
@@ -83,7 +83,7 @@ export default class ButtonSubmit extends Component {
             {this.state.isLoading ? (
               <Image source={spinner} style={styles.image} />
             ) : (
-              <Text style={styles.text}>LOGIN</Text>
+              <Text style={styles.text}>Sign Up</Text>
             )}
           </TouchableOpacity>
           <Animated.View
@@ -98,35 +98,35 @@ export default class ButtonSubmit extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: -95,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    top: -60,
+    alignItems: "center",
+    justifyContent: "flex-start"
   },
   button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#07575b',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#2b616d",
     height: MARGIN,
     borderRadius: 20,
-    zIndex: 100,
+    zIndex: 100
   },
   circle: {
     height: MARGIN,
     width: MARGIN,
     marginTop: -MARGIN,
     borderWidth: 1,
-    borderColor: '#07575b',
+    borderColor: "#fff",
     borderRadius: 100,
-    alignSelf: 'center',
+    alignSelf: "center",
     zIndex: 99,
-    backgroundColor: '#21a8c6',
+    backgroundColor: "#21a8c6"
   },
   text: {
-    color: 'white',
-    backgroundColor: 'transparent',
+    color: "white",
+    backgroundColor: "transparent"
   },
   image: {
     width: 24,
-    height: 24,
-  },
+    height: 24
+  }
 });

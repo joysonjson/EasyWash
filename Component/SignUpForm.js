@@ -47,17 +47,19 @@ export default class Form extends Component {
         <UserInput
           source={passwordImg}
           secureTextEntry={this.state.showPass}
-          placeholder="Password"
+          placeholder="Enter Password"
           returnKeyType={'done'}
           autoCapitalize={'none'}
           autoCorrect={false}
         />
-        {/* <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.btnEye}
-          onPress={this.showPass}>
-          <Image source={eyeImg} style={styles.iconEye} />
-        </TouchableOpacity> */}
+        <UserInput
+          source={passwordImg}
+          secureTextEntry={this.state.showPass}
+          placeholder="Confirm Password"
+          returnKeyType={'done'}
+          autoCapitalize={'none'}
+          autoCorrect={false}
+        />
       </KeyboardAvoidingView>
     );
   }
@@ -68,7 +70,9 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
+    top: -90,
+
     alignItems: 'center',
   },
   btnEye: {
