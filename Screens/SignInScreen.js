@@ -146,7 +146,6 @@
 //     paddingHorizontal: myWidth * 0.05,
 //     borderWidth: StyleSheet.hairlineWidth,
 //     borderColor: "gray",
-    
 
 //   },
 //   btn: {
@@ -176,15 +175,15 @@
 //   }
 // });
 
- import imgLoading from "../assets/loading.gif";
+import imgLoading from "../assets/loading.gif";
 
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Logo from '../Component/Logo1';
-import Form from '../Component/Form';
-import Wallpaper from '../Component/Wallpaper';
-import ButtonSubmit from '../Component/ButtonSubmit';
-import Dimensions from 'Dimensions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Logo from "../Component/Logo1";
+import Form from "../Component/Form";
+import Wallpaper from "../Component/Wallpaper";
+import ButtonSubmit from "../Component/ButtonSubmit";
+import Dimensions from "Dimensions";
 import { diff } from "../constants/Colors";
 import { myWidth, myHeight } from "../constants/Colors";
 import * as colors from "../constants/Colors";
@@ -198,16 +197,17 @@ import {
   TouchableWithoutFeedback,
   Animated,
   Text,
-} from 'react-native';
+  AsyncStorage
+} from "react-native";
 
-import UserInput from '../Component/UserInput';
-import SignupSection from '../Component/SignupSection';
+import UserInput from "../Component/UserInput";
+import SignupSection from "../Component/SignupSection";
 
-import usernameImg from '../images/username.png';
-import passwordImg from '../images/password.png';
-import eyeImg from '../images/eye_black.png';
-import { sin } from 'react-native/Libraries/Animated/src/Easing';
-
+import usernameImg from "../images/username.png";
+import passwordImg from "../images/password.png";
+import eyeImg from "../images/eye_black.png";
+import { sin } from "react-native/Libraries/Animated/src/Easing";
+import * as firebase from "firebase";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -228,27 +228,42 @@ class SignInScreen extends Component {
   }
 
   signIn = async () => {
-console.log('signIn')
-   
-    if (this.state.username === "") {
-      Alert.alert("Enter your name.");
-      return;
-    }
-      await AsyncStorage.setItem("userToken", this.state.username);
-      console.log("App");
+    console.log("signIn");
 
-      this.props.navigation.navigate("App");
-  
+    // if (this.state.email === "") {
+    //   Alert.alert("Enter your name.");
+    //   return;
+    // }
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword("joy@gmail.com", "123456")
+      .then(
+        () => {
+          console.log("then");
+          this.moveTohome();
+        },
+        error => {
+          console.log(error, "eroor in login");
+        }
+      );
+
+    console.log("App");
+  };
+  moveTohome = async () => {
+    console.log("move to home");
+    await AsyncStorage.setItem("userToken", this.state.email);
+    this.props.navigation.navigate("App");
   };
 
-      
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
+      password: "",
       isLoading: false
     };
-    this.signIn = this.signIn.bind(this)
+    this.signIn = this.signIn.bind(this);
 
     this.buttonAnimated = new Animated.Value(0);
   }
@@ -258,39 +273,40 @@ console.log('signIn')
       outputRange: [myWidth * 0.9, myHeight * 0.08]
     });
     return (
-    // <DismissKeyboard>
+      // <DismissKeyboard>
       <Wallpaper>
         <Logo />
         <Form />
-        <SignupSection  navigation={this.props.navigation}/>
-        <ButtonSubmit onPress={() => {
-			this.signIn()
-		}}
-    />
-  
-   </Wallpaper> 
-  //  </DismissKeyboard>
+        <SignupSection navigation={this.props.navigation} />
+        <ButtonSubmit
+          onPress={() => {
+            this.signIn();
+          }}
+          buttonTitle = "SIGN IN"
+        />
+      </Wallpaper>
+      //  </DismissKeyboard>
     );
   }
 }
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
-const DEVICE_HEIGHT = Dimensions.get('window').height;
+const DEVICE_WIDTH = Dimensions.get("window").width;
+const DEVICE_HEIGHT = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center"
   },
   btnEye: {
-    position: 'absolute',
+    position: "absolute",
     top: 55,
-    right: 28,
+    right: 28
   },
   iconEye: {
     width: 25,
     height: 25,
-    tintColor: 'rgba(0,0,0,0.2)',
+    tintColor: "rgba(0,0,0,0.2)"
   },
   btn: {
     alignItems: "center",
@@ -298,6 +314,6 @@ const styles = StyleSheet.create({
     height: myHeight * 0.08,
     borderRadius: myHeight * 0.04,
     backgroundColor: colors.PRIMARY
-  },
+  }
 });
 export default SignInScreen;

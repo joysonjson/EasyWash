@@ -71,7 +71,7 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    top: -60,
+    top: -80,
     // backgroundColor:'red',
 
     alignItems: 'center',

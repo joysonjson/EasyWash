@@ -1,9 +1,12 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Dimensions from 'Dimensions';
-import {StyleSheet, View, TextInput, Image} from 'react-native';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Dimensions from "Dimensions";
+import { StyleSheet, View, TextInput, Image } from "react-native";
 
 export default class UserInput extends Component {
+  constructor(props) {
+   super(props)
+  }
   render() {
     return (
       <View style={styles.inputWrapper}>
@@ -29,33 +32,32 @@ UserInput.propTypes = {
   secureTextEntry: PropTypes.bool,
   autoCorrect: PropTypes.bool,
   autoCapitalize: PropTypes.string,
-  returnKeyType: PropTypes.string,
+  returnKeyType: PropTypes.string
 };
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
-const DEVICE_HEIGHT = Dimensions.get('window').height;
+const DEVICE_WIDTH = Dimensions.get("window").width;
+const DEVICE_HEIGHT = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
     width: DEVICE_WIDTH - 40,
     height: 40,
     marginHorizontal: 20,
     paddingLeft: 45,
     borderRadius: 20,
-    color: '#003b46',
-    fontWeight:'600',
+    color: "#003b46",
+    fontWeight: "600"
   },
   inputWrapper: {
-    flex: 1,
+    flex: 1
   },
   inlineImg: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 99,
     width: 22,
     height: 22,
     left: 35,
-    top: 9,
-  },
-
+    top: 9
+  }
 });

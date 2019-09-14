@@ -38,7 +38,11 @@ import offersBlueImage from "./assets/offersBlue.png";
 import logoImage from "./assets/appIcon.png";
 import logOut from './Screens/SettingsScreen';
 import AppDrwaNavigator from './sideDrawer'
+import firebaseConfig from './config/firebaseConfig'
+import firebase from 'firebase'
+// import firebaseConfig from 
 
+firebase.initializeApp(firebaseConfig)
 const AuthStackNavigation = createStackNavigator({
  
   Welcome: {

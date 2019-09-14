@@ -53,13 +53,13 @@ const MARGIN = 40;
       this.setState({isLoading: false});
       this.buttonAnimated.setValue(0);
       this.growAnimated.setValue(0);
-    }, 2300);
+    }, 0);
   }
 
   _onGrow=() => {
     Animated.timing(this.growAnimated, {
       toValue: 1,
-      duration: 200,
+      duration: 0,
       easing: Easing.linear,
     }).start();
   }
@@ -89,7 +89,7 @@ const MARGIN = 40;
             {this.state.isLoading ? (
               <Image source={spinner} style={styles.image} />
             ) : (
-              <Text style={styles.text}>LOGIN</Text>
+              <Text style={styles.text}>{this.props.buttonTitle}</Text>
             )}
           </TouchableOpacity>
           <Animated.View

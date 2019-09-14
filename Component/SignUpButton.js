@@ -56,7 +56,6 @@ export default class SignUpButton extends Component {
       this.buttonAnimated.setValue(0);
       this.growAnimated.setValue(0);
     }, 2300);
-    props.navigation.navigate('SignIn')
   }
 
   _onGrow() {
@@ -83,7 +82,8 @@ export default class SignUpButton extends Component {
         <Animated.View style={{width: changeWidth}}>
           <TouchableOpacity
             style={styles.button}
-            onPress={this._onPress}
+            onPressOut={this._onPress}
+            onPress ={this.onPress}
             activeOpacity={1}>
             {this.state.isLoading ? (
               <Image source={spinner} style={styles.image} />
