@@ -19,8 +19,9 @@ import spinner from "../images/loading.gif";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 const MARGIN = 40;
+// class ButtonSubmit extends Comment ({onPress,children})  =>{
 
-export default class ButtonSubmit extends Component {
+ class ButtonSubmit extends Component  {
   constructor() {
     super();
 
@@ -30,10 +31,10 @@ export default class ButtonSubmit extends Component {
 
     this.buttonAnimated = new Animated.Value(0);
     this.growAnimated = new Animated.Value(0);
-    this._onPress = this._onPress.bind(this);
-  }
+    this.onPress = this.onPress.bind(this);
+ }
 
-  _onPress() {
+ onPress= ()=>{
     if (this.state.isLoading) return;
 
     this.setState({isLoading: true});
@@ -55,7 +56,7 @@ export default class ButtonSubmit extends Component {
     }, 2300);
   }
 
-  _onGrow() {
+  _onGrow=() => {
     Animated.timing(this.growAnimated, {
       toValue: 1,
       duration: 200,
@@ -71,14 +72,19 @@ export default class ButtonSubmit extends Component {
     const changeScale = this.growAnimated.interpolate({
       inputRange: [0, 1],
       outputRange: [1, MARGIN],
-    });
+    });  
+
+    const { text, onPress} = this.props;
 
     return (
       <View style={styles.container}>
         <Animated.View style={{width: changeWidth}}>
           <TouchableOpacity
             style={styles.button}
-            onPress={this._onPress}
+            onPress ={this.onPress}
+             onPressOut={() => onPress()}
+ 
+	
             activeOpacity={1}>
             {this.state.isLoading ? (
               <Image source={spinner} style={styles.image} />
@@ -92,7 +98,7 @@ export default class ButtonSubmit extends Component {
         </Animated.View>
       </View>
     );
-  }
+            }
 }
 
 const styles = StyleSheet.create({
@@ -101,6 +107,8 @@ const styles = StyleSheet.create({
     top: -95,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    // backgroundColor:'black',
+    // height:50,
   },
   button: {
     alignItems: 'center',
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#21a8c6',
   },
   text: {
-    color: 'white',
+    // color: 'white',
     backgroundColor: 'transparent',
   },
   image: {
@@ -130,3 +138,5 @@ const styles = StyleSheet.create({
     height: 24,
   },
 });
+
+export default ButtonSubmit;

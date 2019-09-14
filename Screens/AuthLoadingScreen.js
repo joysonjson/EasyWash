@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   AsyncStorage
 } from "react-native";
+import * as firebase from 'firebase';
 
 class AuthLoadingScreen extends Component {
   static navigationOptions = {
@@ -18,12 +19,24 @@ class AuthLoadingScreen extends Component {
       fontWeight: 'bold',
     },
   };
+  componentWillMount(){
+    const firebaseConfig = {
+      apiKey: "AIzaSyALYQGhC9p8s-xBiUqMFoV6Oa4B44It7QM",
+      authDomain: "easy-wash-joy.firebaseapp.com",
+      // databaseURL: "<YOUR-DATABASE-URL>",
+      // storageBucket: "<YOUR-STORAGE-BUCKET>"
+    };
+    // firebase.initializeApp(firebaseConfig);
+
+
+  }
 
     constructor(){
         super()
         this.loadApp()
     }
   loadApp = async () => {
+  //  await AsyncStorage.setItem("userToken", "Joyson");
     const userToken = await AsyncStorage.getItem("userToken");
     this.props.navigation.navigate(userToken ? "App" : "Auth");
   };

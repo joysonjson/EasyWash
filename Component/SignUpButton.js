@@ -12,6 +12,8 @@ import {
   AsyncStorage,
   View
 } from "react-native";
+import { withNavigation } from 'react-navigation';
+
 import { Actions, ActionConst } from "react-native-router-flux";
 
 import spinner from "../images/loading.gif";
@@ -31,6 +33,7 @@ export default class SignUpButton extends Component {
     this.buttonAnimated = new Animated.Value(0);
     this.growAnimated = new Animated.Value(0);
     this._onPress = this._onPress.bind(this);
+    this._onGrow = this._onGrow.bind(this);
   }
 
   _onPress() {
@@ -53,6 +56,7 @@ export default class SignUpButton extends Component {
       this.buttonAnimated.setValue(0);
       this.growAnimated.setValue(0);
     }, 2300);
+    props.navigation.navigate('SignIn')
   }
 
   _onGrow() {
@@ -61,7 +65,8 @@ export default class SignUpButton extends Component {
       duration: 200,
       easing: Easing.linear,
     }).start();
-  }
+    props.navigation.navigate("SignIn")
+   }
 
   render() {
     const changeWidth = this.buttonAnimated.interpolate({
@@ -98,7 +103,7 @@ export default class SignUpButton extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: -60,
+    top: 0,
     alignItems: "center",
     justifyContent: "flex-start"
   },
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#21a8c6"
   },
   text: {
-    color: "white",
+    // color: "white",
     backgroundColor: "transparent"
   },
   image: {

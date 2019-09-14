@@ -35,6 +35,7 @@ export default class Form extends Component {
   }
 
   render() {
+    // const {style,...otherProps} = {this.props}
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <UserInput
@@ -70,10 +71,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    // backgroundColor:'white',
+    // top:0,
   },
   btnEye: {
     position: 'absolute',
-    top: 55,
+    top: 20,
     right: 28,
   },
   iconEye: {

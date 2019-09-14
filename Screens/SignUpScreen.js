@@ -7,7 +7,7 @@ import {
   AsyncStorage
 } from "react-native";
 import Form from "../Component/SignUpForm";
-import Logo from "../Component/Logo";
+import Logo from "../Component/Logo1";
 import WallPaper from "../Component/Wallpaper";
 import ButtonSubmit from '../Component/SignUpButton'
 
@@ -18,7 +18,7 @@ class SignUpScreen extends Component {
         <Logo />
         <Form  style={styles.form}/>
 
-        <ButtonSubmit />
+        <ButtonSubmit  />
       
       </WallPaper>
     );

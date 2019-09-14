@@ -194,7 +194,7 @@ import {
   View,
   ActivityIndicator,
   TouchableOpacity,
-  Image,
+  Alert,
   TouchableWithoutFeedback,
   Animated,
   Text,
@@ -228,24 +228,13 @@ class SignInScreen extends Component {
   }
 
   signIn = async () => {
-    
-    if (this.state.isLoading) return;
-
-    this.setState({ isLoading: true });
-    this._animation(this.buttonAnimated, 1, 200);
-
+console.log('signIn')
+   
     if (this.state.username === "") {
       Alert.alert("Enter your name.");
       return;
     }
-      
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-      this._animation(this.buttonAnimated, 0, 200);
-  }, 2000);
       await AsyncStorage.setItem("userToken", this.state.username);
-      this.buttonAnimated = new Animated.Value(0);
-
       console.log("App");
 
       this.props.navigation.navigate("App");
@@ -259,6 +248,8 @@ class SignInScreen extends Component {
       username: "",
       isLoading: false
     };
+    this.signIn = this.signIn.bind(this)
+
     this.buttonAnimated = new Animated.Value(0);
   }
   render() {
@@ -271,8 +262,12 @@ class SignInScreen extends Component {
       <Wallpaper>
         <Logo />
         <Form />
-        <SignupSection />
-        <ButtonSubmit />
+        <SignupSection  navigation={this.props.navigation}/>
+        <ButtonSubmit onPress={() => {
+			this.signIn()
+		}}
+    />
+  
    </Wallpaper> 
   //  </DismissKeyboard>
     );
